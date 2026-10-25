@@ -175,30 +175,51 @@ async function getCollection() {
   }
 }
 
+// ChromaDB rejects null metadata values with HTTP 422, so only emit scalars.
+function sanitizeMetadata(meta) {
+  const clean = {};
+  for (const [key, value] of Object.entries(meta || {})) {
+    if (value === null || value === undefined) continue;
+    if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") {
+      clean[key] = value;
+    } else {
+      clean[key] = String(value);
+    }
+  }
+  return clean;
+}
+
 /**
  * Add an array of chunks and their corresponding embeddings into ChromaDB or fallback
  */
 async function addChunksToCollection(hash, filename, uploadedBy, folder, chunks, embeddings, s3Key = null) {
   if (!chunks || chunks.length === 0) return;
-  
+  if (!embeddings || embeddings.length !== chunks.length) {
+    throw new Error(
+      `Embedding count (${embeddings ? embeddings.length : 0}) does not match chunk count (${chunks.length})`
+    );
+  }
+
   try {
     const collection = await getCollection();
-    
+
     // Normalize documents and page numbers (handles both string chunks and { text, page } objects)
     const documents = chunks.map((c) => (typeof c === "object" && c.text ? c.text : c));
     const pages = chunks.map((c) => (typeof c === "object" && c.page !== undefined ? c.page : null));
 
     // Generate unique ID for each chunk based on hash and index
     const ids = chunks.map((_, index) => `${hash}_${index}`);
-    
-    const metadatas = chunks.map((_, index) => ({
-      hash,
-      filename,
-      uploadedBy,
-      folder,
-      chunkIndex: index,
-      page: pages[index] !== null ? pages[index] : null,
-    }));
+
+    const metadatas = chunks.map((_, index) =>
+      sanitizeMetadata({
+        hash,
+        filename,
+        uploadedBy,
+        folder,
+        chunkIndex: index,
+        page: pages[index] !== null && pages[index] !== undefined ? pages[index] : undefined,
+      })
+    );
 
     if (collection === fallbackCollection) {
       await collection.add({
@@ -209,14 +230,25 @@ async function addChunksToCollection(hash, filename, uploadedBy, folder, chunks,
         s3Key,
       });
     } else {
-      await collection.add({
-        ids,
-        embeddings,
-        metadatas,
-        documents,
-      });
+      // Upsert keeps re-indexing idempotent: re-running a sync or an upload that
+      // was already indexed overwrites instead of failing on a duplicate id.
+      if (typeof collection.upsert === "function") {
+        await collection.upsert({
+          ids,
+          embeddings,
+          metadatas,
+          documents,
+        });
+      } else {
+        await collection.add({
+          ids,
+          embeddings,
+          metadatas,
+          documents,
+        });
+      }
     }
-    
+
     console.log(`Successfully indexed ${chunks.length} chunks for file: ${filename}`);
   } catch (error) {
     console.error("Failed to add chunks to Collection:", error.message);
@@ -316,6 +348,10 @@ async function syncExistingFiles() {
           db.indexedFiles.push(file.s3Key);
           await writeFallbackDb(db);
           console.log(`[Sync Local Fallback] File hash already indexed. Linked s3Key: ${file.s3Key}`);
+          // The vectors for this content already exist, so the file is searchable
+          // even though this particular copy never went through a full index pass.
+          const dynamoService = require("./dynamoService");
+          await dynamoService.updateIndexStatus(hash, "INDEXED");
           continue;
         }
 
@@ -340,7 +376,6 @@ async function syncExistingFiles() {
         }
 
         const documents = chunks.map((c) => (typeof c === "object" && c.text ? c.text : c));
-        const chunkPages = chunks.map((c) => (typeof c === "object" && c.page !== undefined ? c.page : 1));
 
         // Generate embeddings
         console.log(`[Sync Local Fallback] Generating embeddings for ${chunks.length} chunks...`);
@@ -350,24 +385,24 @@ async function syncExistingFiles() {
           embeddings.push(emb);
         }
 
-        // Add to collection
-        const ids = chunks.map((_, index) => `${hash}_${index}`);
-        const metadatas = chunks.map((_, index) => ({
+        // Index into the active store: ChromaDB when reachable, local JSON fallback otherwise
+        await addChunksToCollection(
           hash,
-          filename: file.filename,
-          uploadedBy: file.uploadedBy || "unknown",
-          folder: file.folder,
-          chunkIndex: index,
-          page: chunkPages[index] || 1,
-        }));
-
-        await fallbackCollection.add({
-          ids,
+          file.filename,
+          file.uploadedBy || "unknown",
+          file.folder,
+          chunks,
           embeddings,
-          metadatas,
-          documents,
-          s3Key: file.s3Key
-        });
+          file.s3Key
+        );
+
+        // Keep local bookkeeping current so the same file is not re-processed on every restart,
+        // regardless of which store now holds its vectors
+        await recordIndexedFile(file.s3Key, hash);
+
+        // Sync is a real indexing path too, so reflect it in the status the UI reads.
+        const dynamoService = require("./dynamoService");
+        await dynamoService.updateIndexStatus(hash, "INDEXED");
 
         console.log(`[Sync Local Fallback] Successfully indexed: ${file.filename}`);
       } catch (err) {
@@ -380,10 +415,31 @@ async function syncExistingFiles() {
   }
 }
 
+/**
+ * Records that a file has been indexed so the startup sync skips it next time.
+ * The bookkeeping lives in the local JSON file whether the vectors themselves
+ * ended up in ChromaDB or in the fallback store.
+ */
+async function recordIndexedFile(s3Key, hash) {
+  if (!s3Key && !hash) return;
+  const db = await readFallbackDb();
+  let changed = false;
+  if (s3Key && !db.indexedFiles.includes(s3Key)) {
+    db.indexedFiles.push(s3Key);
+    changed = true;
+  }
+  if (hash && !db.indexedHashes.includes(hash)) {
+    db.indexedHashes.push(hash);
+    changed = true;
+  }
+  if (changed) await writeFallbackDb(db);
+}
+
 module.exports = {
   client,
   getCollection,
   addChunksToCollection,
   queryCollection,
   syncExistingFiles,
+  recordIndexedFile,
 };

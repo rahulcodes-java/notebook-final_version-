@@ -5,9 +5,24 @@ console.log("Groq key loaded:", !!apiKey);
 
 const NOT_ENOUGH_INFO_PHRASE = "The provided document does not contain sufficient information to answer this question.";
 
+const GROQ_BASE_URL = "https://api.groq.com/openai/v1";
+
+// Groq credentials in priority order. The service fails over to the next key
+// automatically when one is rate-limited or rejected.
+const GROQ_KEY_ENV_VARS = ["GROQ_API_KEY", "GROQ_API_KEY2"];
+
+// Verified available on both keys. Override with GROQ_MODEL if Groq rotates models.
+const GROQ_MODEL = process.env.GROQ_MODEL || "openai/gpt-oss-120b";
+
+function groqKeys() {
+  return GROQ_KEY_ENV_VARS.map((name) => process.env[name]).filter(
+    (value) => typeof value === "string" && value.trim() !== "" && value !== "DUMMY_KEY"
+  );
+}
+
 function getClientConfig() {
-  const currentKey = process.env.GROQ_API_KEY;
-  if (!currentKey || currentKey.trim() === "" || currentKey === "DUMMY_KEY") {
+  const keys = groqKeys();
+  if (keys.length === 0) {
     return {
       client: new OpenAI({
         apiKey: "ollama",
@@ -19,12 +34,61 @@ function getClientConfig() {
   }
   return {
     client: new OpenAI({
-      apiKey: currentKey,
-      baseURL: "https://api.groq.com/openai/v1",
+      apiKey: keys[0],
+      baseURL: GROQ_BASE_URL,
     }),
-    model: "llama-3.1-8b-instant",
+    model: GROQ_MODEL,
     isLocal: false,
   };
+}
+
+// Index of the key that last succeeded, so requests stay sticky to a healthy key.
+let preferredKeyIndex = 0;
+
+// Statuses where switching keys (or a transient retry) can actually help.
+const FAILOVER_STATUS = new Set([401, 403, 404, 408, 429, 500, 502, 503, 504]);
+
+/**
+ * Calls Groq with automatic key failover across GROQ_API_KEY / GROQ_API_KEY2.
+ */
+async function createCompletion(payload) {
+  const keys = groqKeys();
+  let lastError = null;
+
+  for (let attempt = 0; attempt < keys.length; attempt++) {
+    const index = (preferredKeyIndex + attempt) % keys.length;
+    try {
+      const client = new OpenAI({ apiKey: keys[index], baseURL: GROQ_BASE_URL });
+      const result = await client.chat.completions.create(payload);
+      if (attempt > 0) {
+        console.log(`[Groq] Failed over to ${GROQ_KEY_ENV_VARS[index]}.`);
+      }
+      preferredKeyIndex = index;
+      return result;
+    } catch (error) {
+      lastError = error;
+      const status = error && error.status;
+      console.error(
+        `[Groq] ${GROQ_KEY_ENV_VARS[index]} failed (status ${status || "n/a"}): ${error.message}`
+      );
+      if (!status || !FAILOVER_STATUS.has(status)) {
+        throw error;
+      }
+    }
+  }
+
+  throw lastError;
+}
+
+/**
+ * Single entry point for chat completions — routes to Ollama when no Groq key
+ * is configured, otherwise to Groq with key failover.
+ */
+async function complete(config, payload) {
+  if (config.isLocal) {
+    return config.client.chat.completions.create(payload);
+  }
+  return createCompletion(payload);
 }
 
 function getClient() {
@@ -307,7 +371,7 @@ Answer strictly based on the excerpts above. If the document does not contain su
 Response:`;
 
     console.log(`[RAG LLM] Submitting completions request (${config.isLocal ? "Local Ollama" : "Groq API"}) with ${chunks.length} context chunks...`);
-    const chatCompletion = await config.client.chat.completions.create({
+    const chatCompletion = await complete(config, {
       model: config.model,
       messages: [
         { role: "system", content: systemInstruction },
@@ -318,8 +382,12 @@ Response:`;
 
     if (chatCompletion && chatCompletion.choices && chatCompletion.choices[0] && chatCompletion.choices[0].message) {
       console.log("[RAG LLM] Received answer generation response successfully");
-      let content = chatCompletion.choices[0].message.content.trim();
+      let content = (chatCompletion.choices[0].message.content || "").trim();
       content = content.replace(/<think>[\s\S]*?<\/think>/gi, "").trim();
+
+      if (!content) {
+        throw new Error("Groq returned an empty response (model spent the token budget on reasoning).");
+      }
 
       // Post-generation verification
       return verifyAndSanitizeAnswer(content, question, chunks);
@@ -342,15 +410,18 @@ async function generateTestResponse(promptText) {
 
   try {
     console.log("[LLM API] Submitting raw completions test request...");
-    const chatCompletion = await config.client.chat.completions.create({
-      model: config.isLocal ? config.model : "llama-3.3-70b-versatile",
+    const chatCompletion = await complete(config, {
+      model: config.model,
       messages: [{ role: "user", content: promptText }],
     });
 
     if (chatCompletion && chatCompletion.choices && chatCompletion.choices[0] && chatCompletion.choices[0].message) {
       console.log("[LLM API] Received completions test response successfully");
-      let content = chatCompletion.choices[0].message.content.trim();
+      let content = (chatCompletion.choices[0].message.content || "").trim();
       content = content.replace(/<think>[\s\S]*?<\/think>/gi, "").trim();
+      if (!content) {
+        throw new Error("Groq returned an empty response.");
+      }
       return content;
     } else {
       throw new Error("LLM API returned an empty response.");

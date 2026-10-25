@@ -14,6 +14,11 @@
       "userId": "rahyl",
       "passwordHash": "$2a$10$lfVH1u4ZX.2ociSemfiIwekplGja.K8XNCX.txr/m20PgI.5fIYmC",
       "createdAt": "2026-10-19T07:27:57.890Z"
+    },
+    "user123": {
+      "userId": "user123",
+      "passwordHash": "$2a$10$rF/khLO54880xWNwkYncA.xseYfG28beqElXc0I/hqsxDB5/OxNO6",
+      "createdAt": "2026-10-25T19:01:07.232Z"
     }
   },
   "files": {
@@ -25,6 +30,46 @@
       "uploadedBy": "gaurav",
       "uploadedAt": "2026-09-08T17:47:14.538Z",
       "s3Key": "public/default/1788889634534-Cloud-Computing-101.pdf",
+      "isPublic": true
+    },
+    "edca87807ba8e5855b568bbcdde7b2e681e2c6cdaf44348e63ff7cefb492bcf8": {
+      "indexStatus": "FAILED",
+      "hash": "edca87807ba8e5855b568bbcdde7b2e681e2c6cdaf44348e63ff7cefb492bcf8",
+      "filename": "MSE 2 solution.pdf",
+      "folder": "default",
+      "uploadedBy": "gaurav",
+      "uploadedAt": "2026-10-25T18:02:26.561Z",
+      "s3Key": "public/default/1792951346556-MSE 2 solution.pdf",
+      "isPublic": true
+    },
+    "223e5d90d0a7c84a48ffba15a776b56c7e1a856863d3ae00893afb18cfa25bc6": {
+      "indexStatus": "INDEXED",
+      "hash": "223e5d90d0a7c84a48ffba15a776b56c7e1a856863d3ae00893afb18cfa25bc6",
+      "filename": "3. Software Estimation Metric-2023.pdf",
+      "folder": "Artificial Intelligence",
+      "uploadedBy": "gaurav",
+      "uploadedAt": "2026-10-25T18:04:43.017Z",
+      "s3Key": "public/Artificial Intelligence/1792951483008-3. Software Estimation Metric-2023.pdf",
+      "isPublic": true
+    },
+    "91f4a00082464a5010a0df36cda98309491eac72084a8b99c2efb23774b1b550": {
+      "indexStatus": "INDEXED",
+      "hash": "91f4a00082464a5010a0df36cda98309491eac72084a8b99c2efb23774b1b550",
+      "filename": "PERT Problems.pdf",
+      "folder": "Software Engineering",
+      "uploadedBy": "gaurav",
+      "uploadedAt": "2026-10-25T18:32:35.983Z",
+      "s3Key": "public/Software Engineering/1792953155982-PERT Problems.pdf",
+      "isPublic": true
+    },
+    "6b5e111efe78b2db0bc32416f0b97d33470303a903f3d75b4fdf378230032392": {
+      "indexStatus": "INDEXED",
+      "hash": "6b5e111efe78b2db0bc32416f0b97d33470303a903f3d75b4fdf378230032392",
+      "filename": "Random_Forest_in_Bioinformatics.pdf",
+      "folder": "default",
+      "uploadedBy": "gaurav",
+      "uploadedAt": "2026-10-25T18:59:28.947Z",
+      "s3Key": "public/default/1792954768944-Random_Forest_in_Bioinformatics.pdf",
       "isPublic": true
     }
   },
@@ -129,6 +174,389 @@
           "content": "The stored notes are not related to the question.",
           "sources": [],
           "createdAt": "2026-10-19T07:40:57.477Z"
+        }
+      ]
+    },
+    "sess_1792951246350_fbbc8306": {
+      "id": "sess_1792951246350_fbbc8306",
+      "userId": "gaurav",
+      "title": "hi",
+      "createdAt": "2026-10-25T18:00:46.350Z",
+      "updatedAt": "2026-10-25T18:00:59.026Z",
+      "messages": [
+        {
+          "id": "msg_1792951246350_0489f0b6",
+          "role": "user",
+          "content": "hi",
+          "sources": [],
+          "createdAt": "2026-10-25T18:00:46.350Z"
+        },
+        {
+          "id": "msg_1792951259026_670c67c2",
+          "role": "ai",
+          "content": "The provided document does not contain sufficient information to answer this question.",
+          "sources": [],
+          "createdAt": "2026-10-25T18:00:59.026Z"
+        }
+      ]
+    },
+    "sess_1792951255106_7243dba3": {
+      "id": "sess_1792951255106_7243dba3",
+      "userId": "gaurav",
+      "title": "hello",
+      "createdAt": "2026-10-25T18:00:55.106Z",
+      "updatedAt": "2026-10-25T18:01:27.569Z",
+      "messages": [
+        {
+          "id": "msg_1792951255106_d442f0bb",
+          "role": "user",
+          "content": "hello",
+          "sources": [],
+          "createdAt": "2026-10-25T18:00:55.106Z"
+        },
+        {
+          "id": "msg_1792951258995_70331271",
+          "role": "ai",
+          "content": "The provided document does not contain sufficient information to answer this question.",
+          "sources": [],
+          "createdAt": "2026-10-25T18:00:58.995Z"
+        },
+        {
+          "id": "msg_1792951287499_34666cb8",
+          "role": "user",
+          "content": "what is cloud computing",
+          "sources": [],
+          "createdAt": "2026-10-25T18:01:27.499Z"
+        },
+        {
+          "id": "msg_1792951287569_6edc5234",
+          "role": "ai",
+          "content": "The provided document does not contain sufficient information to answer this question.",
+          "sources": [],
+          "createdAt": "2026-10-25T18:01:27.569Z"
+        }
+      ]
+    },
+    "sess_1792954865232_6ad85338": {
+      "id": "sess_1792954865232_6ad85338",
+      "userId": "gaurav",
+      "title": "what is docker",
+      "createdAt": "2026-10-25T19:01:05.231Z",
+      "updatedAt": "2026-10-25T19:05:29.718Z",
+      "messages": [
+        {
+          "id": "msg_1792954865232_530cd33d",
+          "role": "user",
+          "content": "what is docker",
+          "sources": [],
+          "createdAt": "2026-10-25T19:01:05.231Z"
+        },
+        {
+          "id": "msg_1792954867282_fcf987dc",
+          "role": "ai",
+          "content": "The provided document does not contain sufficient information to answer this question.",
+          "sources": [],
+          "createdAt": "2026-10-25T19:01:07.282Z"
+        },
+        {
+          "id": "msg_1792955129661_adc6fa3b",
+          "role": "user",
+          "content": "hello",
+          "sources": [],
+          "createdAt": "2026-10-25T19:05:29.661Z"
+        },
+        {
+          "id": "msg_1792955129718_d62852c1",
+          "role": "ai",
+          "content": "The provided document does not contain sufficient information to answer this question.",
+          "sources": [],
+          "createdAt": "2026-10-25T19:05:29.718Z"
+        }
+      ]
+    },
+    "sess_1792954927944_05786005": {
+      "id": "sess_1792954927944_05786005",
+      "userId": "user123",
+      "title": "What is the difference between a Docker image",
+      "createdAt": "2026-10-25T19:02:07.944Z",
+      "updatedAt": "2026-10-25T19:02:07.944Z",
+      "messages": [
+        {
+          "id": "msg_1792954927944_78bf3f46",
+          "role": "user",
+          "content": "What is the difference between a Docker image and a container?",
+          "sources": [],
+          "createdAt": "2026-10-25T19:02:07.944Z"
+        }
+      ]
+    },
+    "sess_1792956639034_840845ac": {
+      "id": "sess_1792956639034_840845ac",
+      "userId": "qa_mvo8372q",
+      "title": "What is Docker?",
+      "createdAt": "2026-10-25T19:30:39.033Z",
+      "updatedAt": "2026-10-25T19:30:39.086Z",
+      "messages": [
+        {
+          "id": "msg_1792956639034_c8ff2dc5",
+          "role": "user",
+          "content": "What is Docker?",
+          "sources": [],
+          "createdAt": "2026-10-25T19:30:39.033Z"
+        },
+        {
+          "id": "msg_1792956639086_674ce586",
+          "role": "ai",
+          "content": "The provided document does not contain sufficient information to answer this question.",
+          "sources": [],
+          "createdAt": "2026-10-25T19:30:39.086Z"
+        }
+      ]
+    },
+    "sess_1792956965693_31e3305f": {
+      "id": "sess_1792956965693_31e3305f",
+      "userId": "qa_mvo8a5tl",
+      "title": "What is Docker?",
+      "createdAt": "2026-10-25T19:36:05.693Z",
+      "updatedAt": "2026-10-25T19:36:06.451Z",
+      "messages": [
+        {
+          "id": "msg_1792956965693_fef17ecb",
+          "role": "user",
+          "content": "What is Docker?",
+          "sources": [],
+          "createdAt": "2026-10-25T19:36:05.693Z"
+        },
+        {
+          "id": "msg_1792956966451_d5b0cb34",
+          "role": "ai",
+          "content": "Docker is an open platform that builds, ships, and runs applications inside containers, providing a simple, repeatable workflow for containerization. It includes components such as the Docker client (CLI), the Docker Engine daemon (dockerd) that builds and runs containers, and a registry (e.g., Docker Hub) for storing images.",
+          "sources": [
+            {
+              "filename": "docker fundamentals.pdf",
+              "uploadedBy": "unknown",
+              "pages": []
+            }
+          ],
+          "createdAt": "2026-10-25T19:36:06.451Z"
+        }
+      ]
+    },
+    "sess_1792957963724_761afe45": {
+      "id": "sess_1792957963724_761afe45",
+      "userId": "qa_mvo8vl9c",
+      "title": "What is Docker?",
+      "createdAt": "2026-10-25T19:52:43.724Z",
+      "updatedAt": "2026-10-25T19:52:44.643Z",
+      "messages": [
+        {
+          "id": "msg_1792957963724_7d38f175",
+          "role": "user",
+          "content": "What is Docker?",
+          "sources": [],
+          "createdAt": "2026-10-25T19:52:43.724Z"
+        },
+        {
+          "id": "msg_1792957964643_b0883786",
+          "role": "ai",
+          "content": "Docker is an open platform that builds, ships, and runs applications inside containers, providing a simple, repeatable workflow for containerization. It includes components such as the Docker client (CLI), the Docker Engine daemon (dockerd) that builds and runs containers, and a registry (e.g., Docker Hub) for storing images.",
+          "sources": [
+            {
+              "filename": "docker fundamentals.pdf",
+              "uploadedBy": "unknown",
+              "pages": []
+            }
+          ],
+          "createdAt": "2026-10-25T19:52:44.643Z"
+        }
+      ]
+    },
+    "sess_1792958566202_018608bf": {
+      "id": "sess_1792958566202_018608bf",
+      "userId": "qa_mvo8vl9c",
+      "title": "Summarize this document's main topic",
+      "createdAt": "2026-10-25T20:02:46.202Z",
+      "updatedAt": "2026-10-25T20:02:46.224Z",
+      "messages": [
+        {
+          "id": "msg_1792958566202_57dfb4c1",
+          "role": "user",
+          "content": "Summarize this document's main topic",
+          "sources": [],
+          "createdAt": "2026-10-25T20:02:46.202Z"
+        },
+        {
+          "id": "msg_1792958566224_e19d94a1",
+          "role": "ai",
+          "content": "The provided document does not contain sufficient information to answer this question.",
+          "sources": [],
+          "createdAt": "2026-10-25T20:02:46.224Z"
+        }
+      ]
+    },
+    "sess_1792958804766_e2670757": {
+      "id": "sess_1792958804766_e2670757",
+      "userId": "qa_mvo9dlrr",
+      "title": "What is Docker?",
+      "createdAt": "2026-10-25T20:06:44.766Z",
+      "updatedAt": "2026-10-25T20:06:45.429Z",
+      "messages": [
+        {
+          "id": "msg_1792958804766_f4b1cf52",
+          "role": "user",
+          "content": "What is Docker?",
+          "sources": [],
+          "createdAt": "2026-10-25T20:06:44.766Z"
+        },
+        {
+          "id": "msg_1792958805429_0336b562",
+          "role": "ai",
+          "content": "Docker is an open platform that builds, ships, and runs applications inside containers, providing a simple, repeatable workflow for containerization. It includes components such as the Docker client (CLI), the Docker Engine daemon (dockerd) that builds and runs containers, and a registry (e.g., Docker Hub) for storing images.",
+          "sources": [
+            {
+              "filename": "docker fundamentals.pdf",
+              "uploadedBy": "unknown",
+              "pages": []
+            }
+          ],
+          "createdAt": "2026-10-25T20:06:45.429Z"
+        }
+      ]
+    },
+    "sess_1792958975992_ac7be448": {
+      "id": "sess_1792958975992_ac7be448",
+      "userId": "qa_mvo9dlrr",
+      "title": "What is a random forest and how is it used in",
+      "createdAt": "2026-10-25T20:09:35.992Z",
+      "updatedAt": "2026-10-25T20:09:38.583Z",
+      "messages": [
+        {
+          "id": "msg_1792958975993_d3dd260e",
+          "role": "user",
+          "content": "What is a random forest and how is it used in bioinformatics?",
+          "sources": [],
+          "createdAt": "2026-10-25T20:09:35.992Z"
+        },
+        {
+          "id": "msg_1792958978583_64986cf3",
+          "role": "ai",
+          "content": "**Random forest** is an ensemble‑learning technique that builds many decision trees and combines their predictions into a single result.  \nKey characteristics described in the excerpts are:\n\n* **Bootstrap sampling** – each tree is trained on a random sample of the training instances drawn with replacement.  \n* **Random feature selection** – at each split, a random subset of features (e.g., gene features) is considered.  \n* **Majority voting** – for classification, the class that receives the most votes from the individual trees becomes the final prediction.  \n* It can be used for both **classification and regression** and is noted for being robust to noise and capable of handling data sets with many features.\n\n**Use in bioinformatics** (as outlined in the excerpts):\n\n* Applied to **gene‑expression‑based tumour classification** and other gene‑expression pattern analyses.  \n* Used for **classification of biological samples**, **biomarker prioritisation**, and **genomic data analysis**.  \n* Supports **personalised‑medicine research** and **target‑discovery workflows**.  \n\nThus, a random forest is an ensemble of decision trees that aggregates predictions via majority voting, and in bioinformatics it is employed to analyze high‑dimensional gene‑expression data for tasks such as tumor classification, biomarker identification, and broader genomic investigations.",
+          "sources": [
+            {
+              "filename": "qa-test-upload.pdf",
+              "uploadedBy": "qa_mvo9dlrr",
+              "pages": []
+            }
+          ],
+          "createdAt": "2026-10-25T20:09:38.583Z"
+        }
+      ]
+    },
+    "sess_1792959191715_c9f03c50": {
+      "id": "sess_1792959191715_c9f03c50",
+      "userId": "user123",
+      "title": "What is a container in Docker?",
+      "createdAt": "2026-10-25T20:13:11.715Z",
+      "updatedAt": "2026-10-25T20:13:12.489Z",
+      "messages": [
+        {
+          "id": "msg_1792959191715_b1e94dbe",
+          "role": "user",
+          "content": "What is a container in Docker?",
+          "sources": [],
+          "createdAt": "2026-10-25T20:13:11.715Z"
+        },
+        {
+          "id": "msg_1792959192490_614875e5",
+          "role": "ai",
+          "content": "A container in Docker is a running instance of an image—it packages the application together with its dependencies so it can run consistently anywhere.",
+          "sources": [
+            {
+              "filename": "docker fundamentals.pdf",
+              "uploadedBy": "unknown",
+              "pages": []
+            }
+          ],
+          "createdAt": "2026-10-25T20:13:12.489Z"
+        }
+      ]
+    },
+    "sess_1792959436912_ff779940": {
+      "id": "sess_1792959436912_ff779940",
+      "userId": "user123",
+      "title": "What is a Docker image?",
+      "createdAt": "2026-10-25T20:17:16.912Z",
+      "updatedAt": "2026-10-25T20:17:17.526Z",
+      "messages": [
+        {
+          "id": "msg_1792959436912_e40642e9",
+          "role": "user",
+          "content": "What is a Docker image?",
+          "sources": [],
+          "createdAt": "2026-10-25T20:17:16.912Z"
+        },
+        {
+          "id": "msg_1792959437526_a6dd1c20",
+          "role": "ai",
+          "content": "A Docker image is the **blueprint or recipe** that defines an application and its dependencies. It serves as the static template from which containers (running instances) are created. 【Notes Excerpt 1】【Notes Excerpt 2】",
+          "sources": [
+            {
+              "filename": "docker fundamentals.pdf",
+              "uploadedBy": "unknown",
+              "pages": []
+            }
+          ],
+          "createdAt": "2026-10-25T20:17:17.526Z"
+        }
+      ]
+    },
+    "sess_1792970099642_21c78b8e": {
+      "id": "sess_1792970099642_21c78b8e",
+      "userId": "gaurav",
+      "title": "hi",
+      "createdAt": "2026-10-25T23:14:59.642Z",
+      "updatedAt": "2026-10-25T23:15:11.860Z",
+      "messages": [
+        {
+          "id": "msg_1792970099642_d9f15631",
+          "role": "user",
+          "content": "hi",
+          "sources": [],
+          "createdAt": "2026-10-25T23:14:59.642Z"
+        },
+        {
+          "id": "msg_1792970100585_134faf73",
+          "role": "ai",
+          "content": "The provided document does not contain sufficient information to answer this question.",
+          "sources": [],
+          "createdAt": "2026-10-25T23:15:00.585Z"
+        },
+        {
+          "id": "msg_1792970110362_d3cc3f4a",
+          "role": "user",
+          "content": "what is random forest",
+          "sources": [],
+          "createdAt": "2026-10-25T23:15:10.362Z"
+        },
+        {
+          "id": "msg_1792970111860_ee20051a",
+          "role": "ai",
+          "content": "Random Forest is an ensemble learning method that combines many decision trees to make a single prediction. It works by:\n\n* **Bootstrap sampling** – each tree is trained on a randomly sampled set of observations drawn with replacement.  \n* **Random feature selection** – at each split, only a random subset of features (e.g., gene features) is considered.  \n* **Tree construction** – a distinct decision tree is built from each bootstrap sample.  \n* **Individual predictions** – each tree evaluates a sample and outputs a class label.  \n* **Majority voting** – the final class is decided by aggregating the trees’ votes (the class receiving the most votes is chosen).\n\nRandom Forest can be used for both classification and regression and is especially suitable for gene‑expression data because it handles many features, complex patterns, and noise robustly.",
+          "sources": [
+            {
+              "filename": "Random_Forest_in_Bioinformatics.pdf",
+              "uploadedBy": "unknown",
+              "pages": [
+                1,
+                2,
+                3,
+                4,
+                6,
+                8
+              ]
+            }
+          ],
+          "createdAt": "2026-10-25T23:15:11.860Z"
         }
       ]
     }

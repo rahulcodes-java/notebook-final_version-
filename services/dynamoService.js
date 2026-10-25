@@ -103,6 +103,9 @@ async function triggerInlineIndexing(s3Key, hash) {
 
     await chromaService.addChunksToCollection(hash, filename, uploadedBy, folder, chunks, embeddings, s3Key);
 
+    // Record it so the startup sync does not re-process this upload.
+    await chromaService.recordIndexedFile(s3Key, hash);
+
     await updateIndexStatus(hash, "INDEXED");
     console.log(`[Inline Indexing] Completed indexing for hash: ${hash}`);
   } catch (error) {

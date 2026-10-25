@@ -5,7 +5,14 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "chroma": "D:\\Codes\\chromadb-venv\\Scripts\\chroma.exe run --path D:\\Codes\\chroma-data --host localhost --port 8000",
+    "test": "node test-full-suite.js",
+    "test:full": "node test-full-suite.js",
+    "test:chroma": "node test-chroma-connection.js",
+    "test:nuextract": "node test-nuextract-verify.js",
+    "migrate:chroma": "node migrate-fallback-to-chroma.js",
+    "rebuild:chroma": "node rebuild-collection-cosine.js"
   },
   "dependencies": {
     "@google/genai": "^2.9.0",

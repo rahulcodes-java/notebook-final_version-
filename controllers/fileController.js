@@ -26,6 +26,8 @@ async function getFiles(req, res) {
         s3Key: file.s3Key,
         hash: file.hash,
         isPublic: file.isPublic !== false,
+        // Lets the UI distinguish "still indexing" from "failed to index".
+        indexStatus: file.indexStatus || "PENDING",
       }));
 
       return res.json(formattedFiles);
