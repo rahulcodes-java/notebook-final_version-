@@ -1,0 +1,9 @@
+FROM "D:\Codes\nuextract\NuExtract3-Q4_K_M.gguf"
+TEMPLATE """{{ if .System }}<|system|>
+{{ .System }}<|end|>
+{{ end }}{{ if .Prompt }}<|user|>
+{{ .Prompt }}<|end|>
+{{ end }}<|assistant|>
+"""
+PARAMETER temperature 0.2
+PARAMETER num_ctx 8192

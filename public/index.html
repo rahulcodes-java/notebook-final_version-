@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>notebook</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <span class="brand-name">notebook</span>
+        </div>
+        <!-- Hamburger Menu Button -->
+        <button class="navbar-toggle" onclick="toggleMobileMenu()" aria-label="Toggle navigation">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <div class="navbar-menu" id="nav-guest">
+            <a href="index.html" class="nav-item active">Home</a>
+            <a href="explore.html" class="nav-item">Explore Notes</a>
+            <a href="login.html" class="nav-item" id="nav-login">Signin</a>
+        </div>
+        <div class="navbar-menu nav-hidden" id="nav-auth">
+            <a href="index.html" class="nav-item active">Home</a>
+            <a href="explore.html" class="nav-item">Explore Notes</a>
+            <a href="dashboard.html" class="nav-item">Dashboard</a>
+            <a href="chat.html" class="nav-item">AI Chat</a>
+            <button class="nav-item btn-logout" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">notebook</h1>
+            <p class="hero-tagline">Learn Together. Share Knowledge. Grow Together.</p>
+            <p class="hero-description">Join a community of students contributing notes, study materials, PDFs, question banks, and academic resources. Access a growing repository of educational content and use AI-powered search to learn faster.</p>
+            <div class="hero-buttons">
+                <a href="explore.html" class="btn btn-primary">Explore Notes</a>
+                <a href="register.html" class="btn btn-secondary" id="hero-btn-join">Join Community</a>
+                <a href="dashboard.html" class="btn btn-secondary" id="hero-btn-dashboard" style="display:none;">Go to Dashboard</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Messaging -->
+    <section class="community-msg" id="community-msg">
+        <h2>Community First</h2>
+        <ul class="features-list">
+            <li>Community‑contributed notes</li>
+            <li>Shared learning</li>
+            <li>Collaborative education</li>
+            <li>Open knowledge access</li>
+            <li>Helping fellow students</li>
+        </ul>
+    </section>
+
+    <!-- Public Access Information -->
+    <section class="public-access" id="public-access">
+        <h2>Explore Without an Account</h2>
+        <ul>
+            <li>Browse notes</li>
+            <li>Search notes</li>
+            <li>View subjects</li>
+            <li>Explore contributors</li>
+            <li>Download public resources</li>
+        </ul>
+    </section>
+
+    <!-- Community Statistics -->
+    <section class="stats" id="stats">
+        <h2>Community Statistics</h2>
+        <div class="stats-grid" id="stats-grid">
+            <div class="stat-card"><span class="stat-number" id="total-notes">0</span><span class="stat-label">Total Notes Shared</span></div>
+            <div class="stat-card"><span class="stat-number" id="total-contributors">0</span><span class="stat-label">Total Contributors</span></div>
+            <div class="stat-card"><span class="stat-number" id="total-subjects">0</span><span class="stat-label">Total Subjects Covered</span></div>
+            <div class="stat-card"><span class="stat-number" id="total-downloads">0</span><span class="stat-label">Total Downloads</span></div>
+        </div>
+    </section>
+
+    <!-- Featured Notes -->
+    <section class="featured-notes" id="featured-notes">
+        <h2>Featured Notes</h2>
+        <div class="cards-container" id="featured-notes-container"></div>
+    </section>
+
+    <!-- Top Contributors -->
+    <section class="top-contributors" id="top-contributors">
+        <h2>Top Contributors</h2>
+        <div class="cards-container" id="top-contributors-container"></div>
+    </section>
+
+    <!-- AI Assistant (secondary) -->
+    <section class="ai-assistant" id="ai-assistant">
+        <h2>AI Assistant (Optional)</h2>
+        <p>Ask questions from thousands of community‑contributed notes using AI‑powered semantic search and Retrieval‑Augmented Generation.</p>
+        <a href="chat.html" class="btn btn-primary">Try AI Chat</a>
+    </section>
+
+    <!-- Footer Navigation -->
+    <footer class="footer-nav" id="footer-nav">
+        <nav class="nav-links">
+            <a href="https://github.com/Sc4redCr0w/" class="nav-link" target="_blank" rel="noopener noreferrer" title="GitHub">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/gaurav-yadav-3961a734b/" class="nav-link" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+        </nav>
+    </footer>
+
+    <script src="home.js"></script>
+    <script>
+        // Authentication UI handling
+        const token = localStorage.getItem('token');
+        if (token) {
+            document.getElementById('nav-guest').classList.add('nav-hidden');
+            document.getElementById('nav-auth').classList.remove('nav-hidden');
+            document.getElementById('hero-btn-join').style.display = 'none';
+            document.getElementById('hero-btn-dashboard').style.display = 'inline-flex';
+        } else {
+            document.getElementById('nav-guest').classList.remove('nav-hidden');
+            document.getElementById('nav-auth').classList.add('nav-hidden');
+            document.getElementById('hero-btn-join').style.display = 'inline-flex';
+            document.getElementById('hero-btn-dashboard').style.display = 'none';
+        }
+        function toggleMobileMenu() {
+            const guestMenu = document.getElementById("nav-guest");
+            const authMenu = document.getElementById("nav-auth");
+            if (guestMenu && !guestMenu.classList.contains("nav-hidden")) {
+                guestMenu.classList.toggle("active");
+            }
+            if (authMenu && !authMenu.classList.contains("nav-hidden")) {
+                authMenu.classList.toggle("active");
+            }
+        }
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>

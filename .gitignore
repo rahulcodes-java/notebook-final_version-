@@ -1,0 +1,9 @@
+# Dependency directories (never commit these, they can be re-installed)
+node_modules/
+
+# Environment variables / Secrets (contains API keys, passwords, etc.)
+.env
+
+# Optional: System/OS files that clutter the repo
+.DS_Store
+Thumbs.db

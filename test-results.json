@@ -1,0 +1,353 @@
+{
+  "summary": {
+    "total": 38,
+    "passed": 38,
+    "failed": 0,
+    "passRate": "100.0%",
+    "timestamp": "2026-10-15T04:45:05.941Z"
+  },
+  "results": [
+    {
+      "tcId": "TC-AUTH-001",
+      "moduleName": "Authentication & Access Control",
+      "testName": "User Registration (Valid Credentials)",
+      "description": "Registers a new unique user with valid userId and password.",
+      "expected": "HTTP 201 Created with { success: true, message: 'User registered successfully', userId: testUser }",
+      "actual": "HTTP 201 | {\"success\":true,\"message\":\"User registered successfully\",\"userId\":\"test_usr_1792039505952\"}",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-AUTH-002",
+      "moduleName": "Authentication & Access Control",
+      "testName": "Duplicate User Registration Prevention",
+      "description": "Attempts to register an already existing user ID to prevent account conflicts.",
+      "expected": "HTTP 409 Conflict with { success: false, error: 'User already exists' }",
+      "actual": "HTTP 409 | {\"success\":false,\"error\":\"User already exists\"}",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-AUTH-003",
+      "moduleName": "Authentication & Access Control",
+      "testName": "Registration Input Validation (Missing Password)",
+      "description": "Rejects registration requests lacking required credentials.",
+      "expected": "HTTP 400 Bad Request with { success: false, error: 'userId and password are required' }",
+      "actual": "HTTP 400 | {\"success\":false,\"error\":\"userId and password are required\"}",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-AUTH-004",
+      "moduleName": "Authentication & Access Control",
+      "testName": "User Login (Valid Credentials)",
+      "description": "Authenticates valid credentials and generates a signed 7-day JWT token.",
+      "expected": "HTTP 200 OK with { success: true, message: 'Login successful', token: '<JWT_STRING>' }",
+      "actual": "HTTP 200 | success: true, token generated: true",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-AUTH-005",
+      "moduleName": "Authentication & Access Control",
+      "testName": "User Login (Invalid Password)",
+      "description": "Verifies that login fails when an incorrect password is provided.",
+      "expected": "HTTP 401 Unauthorized with { success: false, error: 'Invalid userId or password' }",
+      "actual": "HTTP 401 | {\"success\":false,\"error\":\"Invalid userId or password\"}",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-AUTH-006",
+      "moduleName": "Authentication & Access Control",
+      "testName": "User Login (Non-existent User)",
+      "description": "Verifies rejection when attempting login with unregistered user ID.",
+      "expected": "HTTP 401 Unauthorized with { success: false, error: 'Invalid userId or password' }",
+      "actual": "HTTP 401 | {\"success\":false,\"error\":\"Invalid userId or password\"}",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-AUTH-007",
+      "moduleName": "Authentication & Access Control",
+      "testName": "JWT Middleware Verification (Valid Token)",
+      "description": "Validates Bearer token from headers and populates req.user.userId.",
+      "expected": "Calls next() and populates req.user with decoded userId payload.",
+      "actual": "nextCalled: true, req.user: {\"userId\":\"test_usr_1792039505952\"}",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-AUTH-008",
+      "moduleName": "Authentication & Access Control",
+      "testName": "JWT Middleware Protection (Missing Token)",
+      "description": "Blocks unauthenticated requests lacking Authorization headers.",
+      "expected": "HTTP 401 Unauthorized with descriptive error and next() not called.",
+      "actual": "HTTP 401 | nextCalled: false | {\"success\":false,\"error\":\"Authorization header missing or invalid format. Expected 'Bearer <token>'.\"}",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-AUTH-009",
+      "moduleName": "Authentication & Access Control",
+      "testName": "JWT Middleware Protection (Tampered Token)",
+      "description": "Blocks requests with forged, corrupted, or invalid signature tokens.",
+      "expected": "HTTP 401 Unauthorized with 'Invalid or expired authorization token.'",
+      "actual": "HTTP 401 | nextCalled: false | {\"success\":false,\"error\":\"Invalid or expired authorization token.\"}",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-INGEST-001",
+      "moduleName": "File Ingestion & Text Processing",
+      "testName": "Plain Text Document Extraction",
+      "description": "Extracts full UTF-8 text from raw text document buffers.",
+      "expected": "Exact match with original input string content.",
+      "actual": "Extracted: \"DocSense Cloud Note: Microservices communicate via lightweight protocols like HTTP/REST or gRPC.\" (Length: 96 chars)",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-INGEST-002",
+      "moduleName": "File Ingestion & Text Processing",
+      "testName": "Buffer Validation & Error Handling",
+      "description": "Validates that invalid inputs throw a clear descriptive error instead of crashing.",
+      "expected": "Throws Error: 'Invalid file buffer provided'",
+      "actual": "Caught error: \"Invalid file buffer provided\"",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-INGEST-003",
+      "moduleName": "File Ingestion & Text Processing",
+      "testName": "Text Chunking with Overlap Sliding Window",
+      "description": "Chunks text into segments of defined size (40 chars) with 10 chars overlap between consecutive blocks.",
+      "expected": "Produces array of chunks where chunk[i] and chunk[i+1] share 10 chars boundary overlap.",
+      "actual": "Total chunks: 4 | Chunk[0]: \"Sentence One. Sentence Two. Sentence Thr\" | Chunk[1]: \"ntence Three. Sentence Four. Sentence Fi\" | Overlap verified: true",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-INGEST-004",
+      "moduleName": "File Ingestion & Text Processing",
+      "testName": "Edge Case Chunking (Empty Text)",
+      "description": "Handles blank or null text without error, returning an empty array.",
+      "expected": "Empty array [] returned.",
+      "actual": "Returned: []",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-INGEST-005",
+      "moduleName": "File Ingestion & Text Processing",
+      "testName": "Storage Service File Persistence & Download",
+      "description": "Writes a file buffer to storage path and verifies exact bit-for-bit readback integrity.",
+      "expected": "Upload returns { success: true } and download returns identical byte buffer.",
+      "actual": "Upload: {\"success\":true,\"key\":\"public/test_folder/test_doc_1792039505952.txt\"} | Downloaded match: true",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-INGEST-006",
+      "moduleName": "File Ingestion & Text Processing",
+      "testName": "Storage Service Public Folder Listing",
+      "description": "Scans the public storage directory and returns list of accessible category folders.",
+      "expected": "Array containing public subject folders including 'default'.",
+      "actual": "Folders retrieved: [\"default\",\"test_folder\"]",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-FILE-001",
+      "moduleName": "File Management & Access Control",
+      "testName": "Public Files Listing (Unauthenticated Access)",
+      "description": "Allows unauthenticated public listing of all openly shared subject notes.",
+      "expected": "HTTP 200 OK with array of files where isPublic === true.",
+      "actual": "HTTP 200 | Files returned: 1 items | All public: true",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-FILE-002",
+      "moduleName": "File Management & Access Control",
+      "testName": "User Accessible Files Listing (Authenticated)",
+      "description": "Fetches combined view of public notes plus private notes owned by the authenticated user.",
+      "expected": "HTTP 200 OK with list containing public files and test user's private files.",
+      "actual": "HTTP 200 | Count: 1",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-FILE-003",
+      "moduleName": "File Management & Access Control",
+      "testName": "Public File Download (Direct Access)",
+      "description": "Allows any user to download a public note without requiring an authorization header.",
+      "expected": "HTTP 200 OK with binary PDF buffer stream.",
+      "actual": "HTTP 200 | Buffer length: 996220 bytes | IsBuffer: true",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-FILE-004",
+      "moduleName": "File Management & Access Control",
+      "testName": "Private File Download Security (Unauthenticated Rejection)",
+      "description": "Blocks attempts to download private user documents without an authentication token.",
+      "expected": "HTTP 401 Unauthorized with 'Authentication required for private files'.",
+      "actual": "HTTP 401 | {\"success\":false,\"error\":\"Authentication required for private files\"}",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-FILE-005",
+      "moduleName": "File Management & Access Control",
+      "testName": "Private File Isolation (Unauthorized User Access)",
+      "description": "Ensures authenticated users cannot download another user's private files.",
+      "expected": "HTTP 403 Forbidden with 'Access denied to this private file'.",
+      "actual": "HTTP 403 | {\"success\":false,\"error\":\"Access denied to this private file\"}",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-FILE-006",
+      "moduleName": "File Management & Access Control",
+      "testName": "File Upload Payload Validation (Missing File)",
+      "description": "Rejects upload requests when no file is attached in multipart form.",
+      "expected": "HTTP 400 Bad Request with { success: false, error: 'No file uploaded' }.",
+      "actual": "HTTP 400 | {\"success\":false,\"error\":\"No file uploaded\"}",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-VEC-001",
+      "moduleName": "Vector Embeddings & Semantic Search",
+      "testName": "Semantic Embedding Generation",
+      "description": "Generates dense floating-point vector representation using Ollama nomic-embed-text / local transformer.",
+      "expected": "Non-empty array of floating point numbers (dimension 768 or 384).",
+      "actual": "Vector length: 768 | Sample elements: [0.0237, 0.0937, -0.1793, ...]",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-VEC-002",
+      "moduleName": "Vector Embeddings & Semantic Search",
+      "testName": "Embedding Input Validation (Empty Text)",
+      "description": "Rejects empty or non-string inputs with an explanatory error.",
+      "expected": "Throws Error: 'Text content must be a non-empty string to generate embeddings'.",
+      "actual": "Caught error: \"Text content must be a non-empty string to generate embeddings\"",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-VEC-003",
+      "moduleName": "Vector Embeddings & Semantic Search",
+      "testName": "Vector Store Semantic Similarity Query",
+      "description": "Performs K-Nearest-Neighbor similarity search against indexed document chunks.",
+      "expected": "Returns documents, metadatas, and cosine distances matching top-k results.",
+      "actual": "Retrieved documents: 3 | Top distance: 0.2472",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-VEC-004",
+      "moduleName": "Vector Embeddings & Semantic Search",
+      "testName": "Vector Query Metadata Scope Filtering",
+      "description": "Ensures metadata filtering correctly isolates results to the specified owner scope.",
+      "expected": "Zero chunks returned when querying with an unmatched user filter.",
+      "actual": "Results returned for unmatched owner: 0 chunks",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-RAG-001",
+      "moduleName": "RAG Reasoning & Grounding Pipeline",
+      "testName": "Contextual Chunk Relevance Scoring",
+      "description": "Evaluates token overlap and filters out irrelevant chunks prior to sending to LLM.",
+      "expected": "Identifies Excerpt 0 as relevant and excludes culinary Excerpt 1.",
+      "actual": "Relevant chunk indices: [0]",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-RAG-002",
+      "moduleName": "RAG Reasoning & Grounding Pipeline",
+      "testName": "Out-of-Scope Query Refusal & Zero Hallucination",
+      "description": "Refuses to answer out-of-domain questions with no matching note material and emits zero sources.",
+      "expected": "Answer states notes are not related and sources array is empty [].",
+      "actual": "Answer: \"The stored notes are not related to the question.\" | Sources: []",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-RAG-003",
+      "moduleName": "RAG Reasoning & Grounding Pipeline",
+      "testName": "Grounded In-Domain Q&A Retrieval",
+      "description": "Retrieves stored cloud computing notes, grounds the answer, and provides precise citation.",
+      "expected": "Answer explains cloud computing and sources list includes 'Cloud-Computing-101.pdf'.",
+      "actual": "Answer: \"Cloud computing is a transformative technology that provides computing resources over the internet on demand, with costs...\" | Sources: [{\"filename\":\"Cloud-Computing-101.pdf\",\"uploadedBy\":\"gaurav\"}]",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-CHAT-001",
+      "moduleName": "Chat Sessions & History Management",
+      "testName": "Create New Chat Session",
+      "description": "Creates an isolated session item with UUID, custom title, and user ownership.",
+      "expected": "Session object with unique ID, title 'Distributed Systems Q&A', and empty messages array.",
+      "actual": "Session ID: sess_1792039614514_197768f3 | Title: \"Distributed Systems Q&A\"",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-CHAT-002",
+      "moduleName": "Chat Sessions & History Management",
+      "testName": "Append User Query & Grounded AI Response to Session",
+      "description": "Records user prompt followed by AI response including source citation metadata.",
+      "expected": "Session messages count = 2, containing both user and ai roles with citation.",
+      "actual": "Message count: 2 | Citations attached: true",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-CHAT-003",
+      "moduleName": "Chat Sessions & History Management",
+      "testName": "Auto-Create Session from First Prompt",
+      "description": "Automatically initializes a new conversation session when sessionId is not supplied.",
+      "expected": "New session created with smart title derived from the initial user question.",
+      "actual": "Auto Session ID: sess_1792039614561_6cdbb8e5 | Derived Title: \"Explain Docker containerization vs virtual ma\"",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-CHAT-004",
+      "moduleName": "Chat Sessions & History Management",
+      "testName": "List User Conversations",
+      "description": "Retrieves all sessions belonging to the user sorted chronologically by last update.",
+      "expected": "Array containing all active user conversations (at least 2 sessions).",
+      "actual": "Total sessions retrieved: 2",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-CHAT-005",
+      "moduleName": "Chat Sessions & History Management",
+      "testName": "Delete Specific Conversation Session",
+      "description": "Deletes an individual chat session and verifies it no longer exists.",
+      "expected": "Returns true and subsequent getSession returns null.",
+      "actual": "Deleted status: true | Session exists after delete: false",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-CHAT-006",
+      "moduleName": "Chat Sessions & History Management",
+      "testName": "Clear Entire User Chat History",
+      "description": "Wipes all chat history for the target user while leaving other users unaffected.",
+      "expected": "Count of cleared sessions >= 1, and remaining sessions for user = 0.",
+      "actual": "Sessions cleared: 1 | Remaining sessions: 0",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-SYS-001",
+      "moduleName": "System Status & API Infrastructure",
+      "testName": "Server Health Status Endpoint Check",
+      "description": "Verifies the health check heartbeat route reports operational status with ISO timestamp.",
+      "expected": "{ status: 'running', timestamp: '<ISO_DATE_STRING>' }.",
+      "actual": "System status: \"running\", timestamp: \"2026-10-15T04:46:54.606Z\"",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-SYS-002",
+      "moduleName": "System Status & API Infrastructure",
+      "testName": "Frontend Static Assets Availability",
+      "description": "Verifies presence of core UI pages (login, dashboard, chat, explore, styles).",
+      "expected": "All key HTML, CSS, and JS static assets exist in public directory.",
+      "actual": "Missing files: None (All 5 files verified)",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-SYS-003",
+      "moduleName": "System Status & API Infrastructure",
+      "testName": "Environment Variables Configuration Integrity",
+      "description": "Verifies critical operational variables (JWT_SECRET, PORT) are defined and valid.",
+      "expected": "JWT_SECRET is non-empty string and PORT is assigned.",
+      "actual": "PORT: 3000 | JWT_SECRET configured: true (Length: 36)",
+      "status": "PASS"
+    },
+    {
+      "tcId": "TC-SYS-004",
+      "moduleName": "System Status & API Infrastructure",
+      "testName": "Global Error Handler Payload Standardization",
+      "description": "Ensures the application provides uniform, safe error JSON payloads on unexpected runtime faults.",
+      "expected": "{ success: false, error: 'An unexpected internal server error occurred' }",
+      "actual": "Error payload format: {\"success\":false,\"error\":\"An unexpected internal server error occurred\"}",
+      "status": "PASS"
+    }
+  ]
+}

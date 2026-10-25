@@ -1,0 +1,136 @@
+{
+  "users": {
+    "gaurav": {
+      "userId": "gaurav",
+      "passwordHash": "$2a$10$YVcIf2fnaS4oCVaTRPb3ne0v1Zir4FMzltzrqpMy00yYVsA3tlpnK",
+      "createdAt": "2026-09-08T17:45:57.235Z"
+    },
+    "test_usr_1792039505952": {
+      "userId": "test_usr_1792039505952",
+      "passwordHash": "$2a$10$2kQ5XV1mJkbpAi0qFJ/ynuI1rDmkV.iFg104tENSEOhpagTN.tZ1u",
+      "createdAt": "2026-10-15T04:45:06.249Z"
+    },
+    "rahyl": {
+      "userId": "rahyl",
+      "passwordHash": "$2a$10$lfVH1u4ZX.2ociSemfiIwekplGja.K8XNCX.txr/m20PgI.5fIYmC",
+      "createdAt": "2026-10-19T07:27:57.890Z"
+    }
+  },
+  "files": {
+    "61e79244d8f6a5e6b24f77ad2f35d686ca6bf8f7c10e1e9a8ae31bd34be01d8b": {
+      "indexStatus": "INDEXED",
+      "hash": "61e79244d8f6a5e6b24f77ad2f35d686ca6bf8f7c10e1e9a8ae31bd34be01d8b",
+      "filename": "Cloud-Computing-101.pdf",
+      "folder": "default",
+      "uploadedBy": "gaurav",
+      "uploadedAt": "2026-09-08T17:47:14.538Z",
+      "s3Key": "public/default/1788889634534-Cloud-Computing-101.pdf",
+      "isPublic": true
+    }
+  },
+  "chatSessions": {
+    "sess_1792394912828_259cc25c": {
+      "id": "sess_1792394912828_259cc25c",
+      "userId": "rahyl",
+      "title": "who is shahrukh khan ?",
+      "createdAt": "2026-10-19T07:28:32.828Z",
+      "updatedAt": "2026-10-19T07:28:37.591Z",
+      "messages": [
+        {
+          "id": "msg_1792394912829_455e63d6",
+          "role": "user",
+          "content": "who is shahrukh khan ?",
+          "sources": [],
+          "createdAt": "2026-10-19T07:28:32.828Z"
+        },
+        {
+          "id": "msg_1792394917591_fea220b6",
+          "role": "ai",
+          "content": "The stored notes are not related to the question.",
+          "sources": [],
+          "createdAt": "2026-10-19T07:28:37.591Z"
+        }
+      ]
+    },
+    "sess_1792395127721_add9db87": {
+      "id": "sess_1792395127721_add9db87",
+      "userId": "rahyl",
+      "title": "What is a hypervisor, and what are its main r",
+      "createdAt": "2026-10-19T07:32:07.721Z",
+      "updatedAt": "2026-10-19T07:40:57.477Z",
+      "messages": [
+        {
+          "id": "msg_1792395127721_b616a242",
+          "role": "user",
+          "content": "What is a hypervisor, and what are its main responsibilities in virtualization?",
+          "sources": [],
+          "createdAt": "2026-10-19T07:32:07.721Z"
+        },
+        {
+          "id": "msg_1792395206540_1c240074",
+          "role": "ai",
+          "content": "A hypervisor is a software layer that runs on hardware, creating multiple virtual machines (VMs) that share the same physical resources. Its main responsibilities include:\n\n1. **Scheduling CPU Time Fairly**: Ensures each VM gets its own share of CPU time to prevent resource contention and maintain efficient utilization.\n\n2. **Monitoring VM Health**: Tracks the usage and health of each VM to prevent crashes and ensure optimal performance.\n\n3. **Efficient Resource Utilization**: Shares hardware resources efficiently among multiple VMs, enhancing scalability and cost-efficiency.\n\nThese responsibilities make hypervisors suitable for data centers, offering scalability, reliability, and cost-effectiveness.",
+          "sources": [
+            {
+              "filename": "Cloud-Computing-101.pdf",
+              "uploadedBy": "gaurav"
+            }
+          ],
+          "createdAt": "2026-10-19T07:33:26.539Z"
+        },
+        {
+          "id": "msg_1792395224089_202d87ef",
+          "role": "user",
+          "content": "How can cloud computing help a startup handle sudden increases in website traffic without purchasing additional physical servers?",
+          "sources": [],
+          "createdAt": "2026-10-19T07:33:44.089Z"
+        },
+        {
+          "id": "msg_1792395336709_994d5e6d",
+          "role": "ai",
+          "content": "Cloud computing can effectively help a startup manage sudden increases in website traffic by leveraging on-demand resources and scalable services. Here's how it can be applied:\n\n1. **On-Demand Resources**: Cloud computing provides resources that can be scaled almost instantly, allowing the startup to handle sudden spikes in traffic without adding more physical servers. This on-demand nature ensures quick scaling and adaptation.\n\n2. **Service Models**: Cloud computing uses service models like PaaS (Personal Application Service), which enables the deployment of applications and code without managing servers. This is ideal for startups needing to scale their operations on the fly.\n\n3. **Cost Efficiency**: Cloud computing charges by use rather than by hardware, making it more economical for startups to handle traffic spikes without investing in additional physical servers.\n\n4. **Scalability and Speed**: Cloud platforms can scale almost instantly, which is crucial for managing sudden traffic increases. This capability ensures the startup can maintain performance and efficiency without upfront costs.\n\n5. **Serverless Computing**: With serverless computing, the startup can focus on writing code and letting the cloud handle the infrastructure. This approach avoids the need for managing servers, saving time and resources.\n\nBy utilizing these cloud computing features, a startup can efficiently manage sudden traffic spikes, scale operations on the fly, and maintain performance without the upfront investment of additional hardware.",
+          "sources": [
+            {
+              "filename": "Cloud-Computing-101.pdf",
+              "uploadedBy": "gaurav"
+            }
+          ],
+          "createdAt": "2026-10-19T07:35:36.709Z"
+        },
+        {
+          "id": "msg_1792395373030_ab5f554e",
+          "role": "user",
+          "content": "How does Kubernetes manage container orchestration, including automatic pod scaling, service discovery, and load balancing?",
+          "sources": [],
+          "createdAt": "2026-10-19T07:36:13.030Z"
+        },
+        {
+          "id": "msg_1792395485875_21f63405",
+          "role": "ai",
+          "content": "Kubernetes is a comprehensive container orchestration tool that efficiently manages container services through several key functions:\n\n1. **Automatic Scaling**: Kubernetes automatically scales containers based on demand. It identifies metrics such as CPU usage, memory usage, and I/O I/O to determine when to spin up additional containers. The default scaling factor is 3x, meaning it scales up to three times the current number of containers. This ensures that containers can handle increased workloads without over-provisioning.\n\n2. **Service Discovery**: Kubernetes uses the Service Discovery Protocol (SDP) for service discovery. SDP, particularly version SDP2, is robust and efficient. It allows containers to communicate and find each other, ensuring that services are discovered and running on the same network.\n\n3. **Load Balancing**: Kubernetes employs a Load Balancer to distribute work evenly across all available containers. It uses metrics like CPU, memory, and I/O usage to assess load distribution. The Load Balancer redistributes tasks, handling up to 100% of the load. It also uses a priority system, giving higher priority to containers with higher priority, ensuring critical services receive the necessary attention.\n\nThese functions work together to ensure efficient container orchestration, making Kubernetes a powerful tool for managing containerized applications.",
+          "sources": [
+            {
+              "filename": "Cloud-Computing-101.pdf",
+              "uploadedBy": "gaurav"
+            }
+          ],
+          "createdAt": "2026-10-19T07:38:05.875Z"
+        },
+        {
+          "id": "msg_1792395657341_946a94f3",
+          "role": "user",
+          "content": "what is the age of aneet padda?",
+          "sources": [],
+          "createdAt": "2026-10-19T07:40:57.341Z"
+        },
+        {
+          "id": "msg_1792395657477_3fea1f9a",
+          "role": "ai",
+          "content": "The stored notes are not related to the question.",
+          "sources": [],
+          "createdAt": "2026-10-19T07:40:57.477Z"
+        }
+      ]
+    }
+  }
+}
