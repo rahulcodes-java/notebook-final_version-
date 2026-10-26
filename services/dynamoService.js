@@ -76,14 +76,40 @@ async function triggerInlineIndexing(s3Key, hash) {
     
     const buffer = await s3Service.downloadFile(s3Key);
     
-    const text = await pdfExtractor.extractText(buffer);
-    if (!text || text.trim().length === 0) {
-      throw new Error("Text content extracted from PDF is empty");
+    const rawText = await pdfExtractor.extractText(buffer);
+    const hasText = !!rawText && rawText.trim().length > 0;
+
+    // A scanned / image-only PDF has no text layer. That is precisely the case
+    // NuExtract (the vision model) exists for, so hand it the page images rather
+    // than failing the upload outright.
+    const SOURCE_INSTRUCTION =
+      "This document has no text layer. Read the page images and transcribe their text, " +
+      "describing any diagrams, charts and tables you see.";
+    const sourceText = hasText ? rawText : SOURCE_INSTRUCTION;
+
+    if (hasText) {
+      console.log(`[Inline Indexing] Extracted ${rawText.trim().length} characters of text.`);
+    } else {
+      console.warn(
+        `[Inline Indexing] ${s3Key} has no text layer; relying on NuExtract to read the page images.`
+      );
     }
 
     // Pass both text and PDF buffer to NuExtract to generate structured notes with image context
     const nuExtractService = require("./nuExtractService");
-    const enhancedNotes = await nuExtractService.processNotes(text, buffer);
+    const enhancedNotes = await nuExtractService.processNotes(sourceText, buffer);
+
+    if (!enhancedNotes || !enhancedNotes.trim()) {
+      throw new Error("Indexing produced no text");
+    }
+    // processNotes returns its input verbatim when NuExtract fails. For a text-less
+    // PDF that would mean indexing our own instruction string instead of the document.
+    if (!hasText && (enhancedNotes === sourceText || enhancedNotes.trim().length <= 100)) {
+      throw new Error(
+        "PDF has no text layer and NuExtract could not read the page images"
+      );
+    }
+    console.log(`[Inline Indexing] Using ${enhancedNotes.length} characters of NuExtract output.`);
 
     const chunks = chunkText(enhancedNotes);
     if (chunks.length === 0) {

@@ -33,7 +33,7 @@
       "isPublic": true
     },
     "edca87807ba8e5855b568bbcdde7b2e681e2c6cdaf44348e63ff7cefb492bcf8": {
-      "indexStatus": "FAILED",
+      "indexStatus": "INDEXED",
       "hash": "edca87807ba8e5855b568bbcdde7b2e681e2c6cdaf44348e63ff7cefb492bcf8",
       "filename": "MSE 2 solution.pdf",
       "folder": "default",
@@ -70,6 +70,56 @@
       "uploadedBy": "gaurav",
       "uploadedAt": "2026-10-25T18:59:28.947Z",
       "s3Key": "public/default/1792954768944-Random_Forest_in_Bioinformatics.pdf",
+      "isPublic": true
+    },
+    "d8d9098f2723b137ef2a55e15e21e146ac0853ffdbeaf7e0b26315decc3bf990": {
+      "indexStatus": "FAILED",
+      "hash": "d8d9098f2723b137ef2a55e15e21e146ac0853ffdbeaf7e0b26315decc3bf990",
+      "filename": "ai aap.pdf",
+      "folder": "Artificial Intelligence",
+      "uploadedBy": "gaurav",
+      "uploadedAt": "2026-10-25T23:22:42.161Z",
+      "s3Key": "public/Artificial Intelligence/1792970562153-ai aap.pdf",
+      "isPublic": true
+    },
+    "6c7001bd73bd7b623d03d65661f05239bd098397b18181a618ba713197574263": {
+      "indexStatus": "INDEXED",
+      "hash": "6c7001bd73bd7b623d03d65661f05239bd098397b18181a618ba713197574263",
+      "filename": "Gaurav COCOMO.pdf",
+      "folder": "default",
+      "uploadedBy": "gaurav",
+      "uploadedAt": "2026-10-25T23:24:12.340Z",
+      "s3Key": "public/default/1792970652339-Gaurav COCOMO.pdf",
+      "isPublic": true
+    },
+    "af820e94b00585d6ee4fa23f240c05e80571b0bdccb74b460775baff8ad46cf7": {
+      "indexStatus": "INDEXED",
+      "hash": "af820e94b00585d6ee4fa23f240c05e80571b0bdccb74b460775baff8ad46cf7",
+      "filename": "pandas1.png",
+      "folder": "default",
+      "uploadedBy": "gaurav",
+      "uploadedAt": "2026-10-25T23:40:45.521Z",
+      "s3Key": "public/default/1792971645520-pandas1.png",
+      "isPublic": true
+    },
+    "e535adf4c5f69bdbfae736e1377867ce693bd512809182205279f93db55ea6a2": {
+      "indexStatus": "INDEXED",
+      "hash": "e535adf4c5f69bdbfae736e1377867ce693bd512809182205279f93db55ea6a2",
+      "filename": "pandas1.pdf",
+      "folder": "default",
+      "uploadedBy": "gaurav",
+      "uploadedAt": "2026-10-25T23:47:27.631Z",
+      "s3Key": "public/default/1792972047630-pandas1.pdf",
+      "isPublic": true
+    },
+    "fbf11c3d9857ea7d5bdb478648d09dc62b06ea68302f484bd74854de0abdde97": {
+      "indexStatus": "INDEXED",
+      "hash": "fbf11c3d9857ea7d5bdb478648d09dc62b06ea68302f484bd74854de0abdde97",
+      "filename": "pandas2.pdf",
+      "folder": "default",
+      "uploadedBy": "gaurav",
+      "uploadedAt": "2026-10-26T00:02:00.320Z",
+      "s3Key": "public/default/1792972920319-pandas2.pdf",
       "isPublic": true
     }
   },
@@ -174,29 +224,6 @@
           "content": "The stored notes are not related to the question.",
           "sources": [],
           "createdAt": "2026-10-19T07:40:57.477Z"
-        }
-      ]
-    },
-    "sess_1792951246350_fbbc8306": {
-      "id": "sess_1792951246350_fbbc8306",
-      "userId": "gaurav",
-      "title": "hi",
-      "createdAt": "2026-10-25T18:00:46.350Z",
-      "updatedAt": "2026-10-25T18:00:59.026Z",
-      "messages": [
-        {
-          "id": "msg_1792951246350_0489f0b6",
-          "role": "user",
-          "content": "hi",
-          "sources": [],
-          "createdAt": "2026-10-25T18:00:46.350Z"
-        },
-        {
-          "id": "msg_1792951259026_670c67c2",
-          "role": "ai",
-          "content": "The provided document does not contain sufficient information to answer this question.",
-          "sources": [],
-          "createdAt": "2026-10-25T18:00:59.026Z"
         }
       ]
     },
@@ -557,6 +584,107 @@
             }
           ],
           "createdAt": "2026-10-25T23:15:11.860Z"
+        }
+      ]
+    },
+    "sess_1792971735176_7153b69a": {
+      "id": "sess_1792971735176_7153b69a",
+      "userId": "gaurav",
+      "title": "what are pandas",
+      "createdAt": "2026-10-25T23:42:15.176Z",
+      "updatedAt": "2026-10-26T00:02:26.200Z",
+      "messages": [
+        {
+          "id": "msg_1792971735176_d1ba2f5f",
+          "role": "user",
+          "content": "what are pandas",
+          "sources": [],
+          "createdAt": "2026-10-25T23:42:15.176Z"
+        },
+        {
+          "id": "msg_1792971735202_5be4147a",
+          "role": "ai",
+          "content": "The provided document does not contain sufficient information to answer this question.",
+          "sources": [],
+          "createdAt": "2026-10-25T23:42:15.202Z"
+        },
+        {
+          "id": "msg_1792972038057_d8742a0d",
+          "role": "user",
+          "content": "what are pandas",
+          "sources": [],
+          "createdAt": "2026-10-25T23:47:18.057Z"
+        },
+        {
+          "id": "msg_1792972040848_4449ec65",
+          "role": "ai",
+          "content": "The provided document does not contain sufficient information to answer this question.",
+          "sources": [],
+          "createdAt": "2026-10-25T23:47:20.848Z"
+        },
+        {
+          "id": "msg_1792972943873_e7e959e4",
+          "role": "user",
+          "content": "what are pandas",
+          "sources": [],
+          "createdAt": "2026-10-26T00:02:23.873Z"
+        },
+        {
+          "id": "msg_1792972946200_2c446ae0",
+          "role": "ai",
+          "content": "Pandas is a Python library (package) designed for data analysis and manipulation. It provides powerful, easy‑to‑use data structures—such as Series, DataFrames, and Panels—and tools for creating, cleaning, exploring, and reshaping data sets. The library enables handling missing data, efficient slicing, flexible merging or reshaping, and answering data‑related questions like correlations and statistical metrics.",
+          "sources": [
+            {
+              "filename": "pandas1.pdf",
+              "uploadedBy": "unknown",
+              "pages": [
+                1
+              ]
+            },
+            {
+              "filename": "pandas2.pdf",
+              "uploadedBy": "gaurav",
+              "pages": []
+            }
+          ],
+          "createdAt": "2026-10-26T00:02:26.200Z"
+        }
+      ]
+    },
+    "sess_1792972888625_c4c305b4": {
+      "id": "sess_1792972888625_c4c305b4",
+      "userId": "gaurav",
+      "title": "what is module 1 for ai",
+      "createdAt": "2026-10-26T00:01:28.625Z",
+      "updatedAt": "2026-10-26T00:01:33.167Z",
+      "messages": [
+        {
+          "id": "msg_1792972888626_aa3adb7f",
+          "role": "user",
+          "content": "what is module 1 for ai",
+          "sources": [],
+          "createdAt": "2026-10-26T00:01:28.625Z"
+        },
+        {
+          "id": "msg_1792972888685_646f7024",
+          "role": "ai",
+          "content": "The provided document does not contain sufficient information to answer this question.",
+          "sources": [],
+          "createdAt": "2026-10-26T00:01:28.685Z"
+        },
+        {
+          "id": "msg_1792972893144_90f99c4f",
+          "role": "user",
+          "content": "ai aap",
+          "sources": [],
+          "createdAt": "2026-10-26T00:01:33.144Z"
+        },
+        {
+          "id": "msg_1792972893167_8e30a18a",
+          "role": "ai",
+          "content": "The provided document does not contain sufficient information to answer this question.",
+          "sources": [],
+          "createdAt": "2026-10-26T00:01:33.167Z"
         }
       ]
     }

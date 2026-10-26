@@ -368,11 +368,36 @@ async function syncExistingFiles() {
 
         if (!chunks || chunks.length === 0) {
           const text = await pdfExtractor.extractText(buffer);
-          if (!text || text.trim().length === 0) {
-            console.warn(`[Sync Local Fallback] Skip ${file.s3Key}: extracted text is empty.`);
-            continue;
+          const hasText = !!text && text.trim().length > 0;
+
+          if (hasText) {
+            chunks = chunkText(text).map((t) => ({ text: t, page: 1 }));
+          } else {
+            // Scanned / image-only PDF: no text layer at all. Instead of skipping it
+            // forever (it would be retried on every restart and never indexed), hand
+            // the rendered page images to NuExtract, which is what it is there for.
+            console.warn(
+              `[Sync Local Fallback] ${file.s3Key} has no text layer; reading page images with NuExtract...`
+            );
+            const nuExtractService = require("./nuExtractService");
+            const SOURCE_INSTRUCTION =
+              "This document has no text layer. Read the page images and transcribe their text, " +
+              "describing any diagrams, charts and tables you see.";
+            const enhanced = await nuExtractService.processNotes(SOURCE_INSTRUCTION, buffer);
+
+            // processNotes returns its input verbatim when NuExtract fails, so a short
+            // or identical result means we learned nothing from the images.
+            if (!enhanced || enhanced.trim().length <= 100 || enhanced === SOURCE_INSTRUCTION) {
+              console.warn(
+                `[Sync Local Fallback] Skip ${file.s3Key}: no text layer and NuExtract produced no usable output.`
+              );
+              continue;
+            }
+            console.log(
+              `[Sync Local Fallback] NuExtract produced ${enhanced.trim().length} characters for ${file.s3Key}.`
+            );
+            chunks = chunkText(enhanced).map((t) => ({ text: t, page: 1 }));
           }
-          chunks = chunkText(text).map((t) => ({ text: t, page: 1 }));
         }
 
         const documents = chunks.map((c) => (typeof c === "object" && c.text ? c.text : c));
